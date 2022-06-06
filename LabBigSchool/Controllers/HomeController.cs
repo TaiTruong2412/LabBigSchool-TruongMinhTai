@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LabBigSchool.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,19 @@ namespace LabBigSchool.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private ApplicationDbContext _dbContext;
+        public HomeController()
         {
-            return View();
+            _dbContext = new ApplicationDbContext();
         }
+        //public ActionResult Index()
+        //{
+        //    var upcommingCourses = _dbContext.Courses
+        //        .Include(c => c.Lecture)
+        //        .Include(c => c.Category)
+        //        .Where(c => c.DateTime > DateTime.Now);
+        //    return View(upcommingCourses);
+        //}
 
         public ActionResult About()
         {

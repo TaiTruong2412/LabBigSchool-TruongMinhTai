@@ -13,10 +13,10 @@ namespace LabBigSchool.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public DateTime DateTime { get; private set; }
-        public object CategoryId { get; private set; }
-        public object Place { get; private set; }
-        public object ViewModel { get; private set; }
+        //public DateTime DateTime { get; private set; }
+        //public object CategoryId { get; private set; }
+        //public object Place { get; private set; }
+        //public object ViewModel { get; private set; }
 
         public CoursesController()
         {
@@ -35,8 +35,14 @@ namespace LabBigSchool.Controllers
         }
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(CourseViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                viewModel.Categories = _dbContext.Categories.ToList();
+                return View("Create", viewModel);
+            }
             var course = new Course
             {
                 LecturerId = User.Identity.GetUserId(),
