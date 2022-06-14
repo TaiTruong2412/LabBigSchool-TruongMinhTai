@@ -110,5 +110,10 @@ namespace LabBigSchool
         {
             throw new NotImplementedException();
         }
+
+        internal Task PasswordSignInAsync(string email, string password, bool rememberMe)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
